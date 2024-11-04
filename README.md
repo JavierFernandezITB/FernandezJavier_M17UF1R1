@@ -18,3 +18,11 @@
 
 - **Gravedad Inversa**: Deberás invertir la gravedad a tu favor para poder pasar los niveles.
 - **Coleccionables**: A medida que avanzas, encontrarás unos diamantes, coleccionalos todos!
+
+## Controles
+
+- A -> Mover el personaje a la izquierda.
+- D -> Mover el personaje a la derecha.
+- Espacio -> Cambiar la gravedad del personaje.
+- E -> Interactuar con objetos.
+
