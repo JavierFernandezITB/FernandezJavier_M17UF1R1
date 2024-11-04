@@ -1,4 +1,6 @@
+using System.Collections;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -7,6 +9,8 @@ public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseMenuUI;
     private bool isPaused = false;
+    private CanvasGroup FadeUI;
+    private bool isRestarting = false;
 
     private void Start()
     {
@@ -18,6 +22,7 @@ public class PauseMenu : MonoBehaviour
         { 
             Destroy(gameObject);
         }
+        FadeUI = GameObject.Find("/UICanvas/Fade").GetComponent<CanvasGroup>();
     }
 
     void Update()
@@ -45,11 +50,26 @@ public class PauseMenu : MonoBehaviour
         isPaused = true;
     }
 
+    private IEnumerator RestartCoroutine()
+    {
+        isRestarting = true;
+        Resume();
+        for (float i = 0; i < 1; i += .1f)
+        {
+            FadeUI.alpha = i;
+            yield return new WaitForSeconds(.1f);
+            Debug.Log("yeet");
+        }
+        FadeUI.alpha = 1;
+        Destroy(GameObject.Find("/Character"));
+        isRestarting = false;
+        SceneManager.LoadScene("1");
+    }
+
     public void Restart()
     {
-        Destroy(GameObject.Find("/Character"));
-        Time.timeScale = 1f;
-        SceneManager.LoadScene("1");
+        if (!isRestarting)
+            StartCoroutine(RestartCoroutine());
     }
 
     public void Quit()

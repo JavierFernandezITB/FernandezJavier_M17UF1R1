@@ -7,6 +7,7 @@ public class PigScript : MonoBehaviour
     public float speed = 1.5f;
     public float movingTime = 2.0f;
     private bool isAlive = true;
+    public bool startLeft = false;
     private Rigidbody2D rb2d;
     private SpriteRenderer rbSprite;
     private Animator characterAnimator;
@@ -42,6 +43,13 @@ public class PigScript : MonoBehaviour
 
     private IEnumerator CharacterAI()
     {
+        if (startLeft)
+        {
+            MoveRight();
+            yield return new WaitForSeconds(movingTime);
+            Stop();
+            yield return new WaitForSeconds(movingTime);
+        }
         while (isAlive)
         {
             MoveLeft();

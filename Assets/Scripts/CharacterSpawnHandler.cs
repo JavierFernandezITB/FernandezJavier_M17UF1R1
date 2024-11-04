@@ -40,14 +40,14 @@ public class CharacterSpawnHandler : MonoBehaviour
                 else
                     transform.position = GameObject.Find("/GoBackSign").transform.position;
                 GameObject TempCamera = GameObject.Find("/Main Camera");
-                TempCamera.transform.position = new Vector3(transform.position.x, transform.position.y, TempCamera.transform.position.z);
+                if (GameObject.Find("/GoBackSign").GetComponent<ExitTombScript>().currentLevel != 5)
+                    TempCamera.transform.position = new Vector3(transform.position.x, transform.position.y, TempCamera.transform.position.z);
                 _gameManagerScript.isSwitchingLevel = false;
             }
         }
         catch (System.Exception)
         {
-            Debug.LogError("Hello, I am a nice and beautiful error that shows up when the first scene loads, please, bear with me (oso conmigo).");
+
         }
-        
     }
 }

@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 4771262289122971241}
   - component: {fileID: 2497802328148450054}
   - component: {fileID: 5147609870583903197}
-  - component: {fileID: 2933757102462996740}
   m_Layer: 0
   m_Name: Cannon Ball
   m_TagString: Untagged
@@ -170,17 +169,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e808a4cf0ee8c804e9a70dc30514efa5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2933757102462996740
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8905556281702213305}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3171a15254141eb498da2c941f3d1ce6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

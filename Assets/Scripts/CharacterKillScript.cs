@@ -13,7 +13,7 @@ public class CharacterKillScript : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private CharacterMovement characterMovement;
     private BoxCollider2D boxCollider;
-    private bool isDead = false; // Flag to prevent multiple deaths
+    private bool isDead = false;
 
     void Start()
     {
@@ -30,14 +30,12 @@ public class CharacterKillScript : MonoBehaviour
 
     private IEnumerator PlayDeathAnimation()
     {
-        isDead = true; // Set the dead flag
         characterMovement.SetDeadState(true);
         audioManagerService.deathAudioSource.Play();
         boxCollider.enabled = false;
         rb2d.gravityScale = 0;
-        rb2d.velocity = Vector2.zero;
         animator.SetBool("isDead", true);
-        yield return new WaitForSeconds(1); // Adjust as needed for your animation
+        yield return new WaitForSeconds(1);
         animator.SetBool("isDead", false);
         character.transform.position = spawnPoint.transform.position;
         spriteRenderer.flipY = false;
@@ -45,15 +43,14 @@ public class CharacterKillScript : MonoBehaviour
         rb2d.gravityScale = 1;
         boxCollider.enabled = true;
         characterMovement.SetDeadState(false);
-        isDead = false; // Reset the dead flag
-        yield return new WaitForEndOfFrame();
+        isDead = false;
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player") && !isDead) // Check if already dead
+        if (other.CompareTag("Player") && !isDead)
         {
-            Debug.Log("well well");
+            isDead = true;
             StartCoroutine(PlayDeathAnimation());
         }
     }

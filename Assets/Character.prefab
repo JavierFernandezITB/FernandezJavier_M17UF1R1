@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6001452596034759429}
   - component: {fileID: 7326202817180094000}
   - component: {fileID: 1155456051022107175}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Character
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -196,6 +196,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   isGravitySwitched: 0
+  isDead: 0
 --- !u!114 &1155456051022107175
 MonoBehaviour:
   m_ObjectHideFlags: 0

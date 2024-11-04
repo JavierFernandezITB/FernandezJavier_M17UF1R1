@@ -2,15 +2,22 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class CannonScript : MonoBehaviour
 {
-    public float time = 1.5f;
+    public float time = 2f;
     public bool cannonEnabled = false;
     public bool left = false;
     public float projectileSpeed = 5f;
     public GameObject CannonBall;
+    public int poolSize = 5;
+
+    private Queue<GameObject> projectilePool;
+
+    void Awake()
+    {
+        InitializeProjectilePool();
+    }
 
     void Start()
     {
@@ -32,11 +39,51 @@ public class CannonScript : MonoBehaviour
         }
     }
 
+    private void InitializeProjectilePool()
+    {
+        projectilePool = new Queue<GameObject>();
+
+        for (int i = 0; i < poolSize; i++)
+        {
+            GameObject projectile = Instantiate(CannonBall);
+            projectile.name = "Cannon Ball (Queued)";
+            projectile.GetComponent<SpriteRenderer>().enabled = false;
+            projectile.GetComponent<BoxCollider2D>().enabled = false;
+            projectilePool.Enqueue(projectile);
+        }
+    }
+
+    private GameObject GetProjectile()
+    {
+        if (projectilePool.Count > 0)
+        {
+            GameObject projectile = projectilePool.Dequeue();
+            projectile.name = "Cannon Ball (Active)";
+            projectile.GetComponent<SpriteRenderer>().enabled = true;
+            projectile.GetComponent<BoxCollider2D>().enabled = true;
+            return projectile;
+        }
+        return null;
+    }
+
+    private void ReturnProjectile(GameObject projectile)
+    {
+        projectile.name = "Cannon Ball (Queued)";
+        projectile.GetComponent<SpriteRenderer>().enabled = false;
+        projectile.GetComponent<BoxCollider2D>().enabled = false;
+        projectilePool.Enqueue(projectile);
+    }
+
     private IEnumerator SpawnCannonBall()
     {
-        GameObject projectile = Instantiate(CannonBall, transform.position, Quaternion.identity);
-        projectile.GetComponent<Rigidbody2D>().velocity = new Vector2(left == false ? projectileSpeed : -projectileSpeed, 0);
-        yield return new WaitForSeconds(time);
+        GameObject projectile = GetProjectile();
+        if (projectile != null)
+        {
+            projectile.transform.position = transform.position;
+            projectile.GetComponent<Rigidbody2D>().velocity = new Vector2(left == false ? projectileSpeed : -projectileSpeed, 0);
+            yield return new WaitForSeconds(time);
+            ReturnProjectile(projectile);
+        }
         yield return SpawnCannonBall();
     }
 }

@@ -47,3 +47,10 @@ MonoBehaviour:
   deathSound: {fileID: 8300000, guid: 8c703afd813fada4bb24a69bee1b21e9, type: 3}
   moveSound: {fileID: 8300000, guid: aa87ed4813be5034ab565b22e3de5e3a, type: 3}
   switchGravSound: {fileID: 0}
+  musicSound: {fileID: 8300000, guid: 038924f1d9f4978428549e04ba675f66, type: 3}
+  diamondSound: {fileID: 8300000, guid: 68480d293bedd164fa0224faf385fd89, type: 3}
+  deathAudioSource: {fileID: 0}
+  moveAudioSource: {fileID: 0}
+  switchGravAudioSource: {fileID: 0}
+  musicAudioSource: {fileID: 0}
+  diamondAudioSource: {fileID: 0}
