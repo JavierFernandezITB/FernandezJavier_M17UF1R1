@@ -25,4 +25,5 @@
 - D -> Mover el personaje a la derecha.
 - Espacio -> Cambiar la gravedad del personaje.
 - E -> Interactuar con objetos.
+- Esc -> Menú de pausa.
 
